@@ -1,16 +1,3 @@
-\documentclass{article}
-\usepackage{verbatim}
-\usepackage{graphicx}
-\usepackage{url}
-\usepackage{hyperref}
-
-\title{Collecting and analyzing FCS and FRET data}
-\author{Ben Gamari}
-
-\begin{document}
-
-\maketitle
-
 Here we describe how to perform both collect data with the FPGA
 timetagger for both Fluorescence Correlation Spectroscopy and
 F\"orster Resonance Energy Transfer experiments.
@@ -54,17 +41,13 @@ electric dipoles.
 The FPGA timetagger records the arrival times of photons from a set of
 up to four detectors. The {\tt timetag\_tools} package provides a set
 of tools for controlling and acquiring data from the FPGA timetagger.
-The {\tt photon\_tools} package then provides a
-set of tools to manipulate and analyze this data. The following
-discussion assumes that you have both of these packages installed. See \ref{
+The {\tt photon\_tools} package then provides a set of tools to
+manipulate and analyze this data. The following discussion assumes
+that you have both of these packages installed. See
+\ref{Ch:Installing} for details on how to do this.
 
 
 
 A FRET experiment will require a sample labelled with both a donor
 and an acceptor dye. This is a primary als
-
-
-
-
-\end{document}
 
