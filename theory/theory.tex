@@ -86,7 +86,33 @@ a simple USB passthrough as seen in \ref{Table:Endpoints}.
   \label{Table:Endpoints}
 \end{table}
 
+The FX2 firmware has only a couple commands of its own as described in
+{\tt timetag-fx2/README}. These are to adjust the queue depth (how
+many records to queue up before sending a USB packet, exposed in {\tt
+  timetag\_ui} as the ``USB latency'').
+
 \section{\tt timetag\_acquire}
-{\tt timetag\_acquire} is a daemon which communicates with and multiplexes access to the timetagger hardware. The device 
+{\tt timetag\_acquire} is a daemon which communicates with and
+multiplexes access to the timetagger hardware. It is responsible for
+abstracting the device's register interface and presents an ASCII
+command interface through a UNIX domain socket
+({\tt /tmp/timetag.sock}). One can interface directly with the daemon
+with the {\tt netcat} utility,
+
+\begin{verbatim}
+$ nc -u /tmp/timetag.sock
+\end{verbatim}
 
 \section{\tt timetag\_ui}
+
+{\tt timetag\_ui} is a Python GTK+ interface to the timetagging
+functionality of the hardware. It communicates with
+{\tt timetag\_acquire} through the domain socket and relies on several
+of the other utilities in {\tt timetag\_tools} for low-level
+manipulation of the incoming data stream.
+
+\section{\tt timetag\_seq\_ui}
+{\tt timetag\_seq\_ui} is a Python GTK+ interface to the sequencer
+functionality of the hardware. It communicates with
+{\tt timetag\_acquire} through the domain socket.
+
