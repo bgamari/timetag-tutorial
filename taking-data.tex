@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+
+\title{Collecting and analyzing FCS and FRET data}
+\author{Ben Gamari}
+
+\begin{document}
+
+\maketitle
+
+Here we describe how to perform both collect data with the FPGA
+timetagger for both Fluorescence Correlation Spectroscopy and
+F\"orster Resonance Energy Transfer experiments.
+
+\section{Fluorescence microscopy}
+Fluorescence microscopy is a set of powerful techniques enabling study
+of small numbers of molecules. While these techniques vary greatly in
+their implementation, the two experiments we will be considering share
+some features.
+
+In these experiments, one sends a beam of excitation light though
+microscope objective lens, creating a small, brightly illuminated
+volume, known as the excitation volume. Fluorescently labelled
+molecules will be excited as they enter this region, resulting in an
+emission of a different wavelength. This emitted light is collected
+through the microscope objective, sent through a pinhole to reduce the
+size of the observation volume, and measured with some variety of
+light detector.
+
+We will be focusing on two classes of fluorescence microscopy
+experiments: Fluorescence Correlation Spectroscopy (FCS) and F\"orster
+Resonance Energy Transfer (FRET).
+
+\subsection{FCS}
+Fluorescence Correlation Spectroscopy (FCS) is a fluorescence
+technique relying on fluctuations in a fluorescence intensity
+signal originating from a fluorescently labelled molecule. While many
+types of fluctuations can be probed with FCS, two of the most common
+are diffusion through the observation volume, and conformational
+changes of the molecule. From a raw intensity intensity signal, a time
+correlation function allows one to identify timescales on which relevant
+dynamics take place.
+
+\subsection{FRET}
+F\"orster Resonance Energy Transfer is an energy tranfer mechanism
+which will take place between two nearby (up to around 50 nanometers),
+electric dipoles.
+
+
+\section{Collecting data with FPGA timetagger}
+The FPGA timetagger records the arrival times of photons from a set of
+up to four detectors. The {\tt timetag\_tools} package provides a set
+of tools for controlling and acquiring data from the FPGA timetagger.
+The {\tt photon\_tools} package then provides a
+set of tools to manipulate and analyze this data. The following
+discussion assumes that you have both of these packages installed. See \ref{
+
+
+
+A FRET experiment will require a sample labelled with both a donor
+and an acceptor dye. This is a primary als
+
+
+
+
+\end{document}
+
