@@ -4,7 +4,62 @@ the larger system.
 
 \begin{figure}
   \center
-  \includegraphics{block-diagram.pdf}
+  \includegraphics[scale=0.7]{block-diagram.pdf}
   \caption{A block diagram of the components of the timetagger.}
+  \label{Fig:BlockDiagram}
 \end{figure}
 
+\section{FPGA implementation}
+The core of the timetagger is implemented on the Xylo board's Altera
+EP2C5 FPGA. The logic is written in Verilog and can be found in the
+{\tt timetag\_fpga} repository. As seen in FPGA block of
+\ref{Fig:BlockDiagram}, the logic can be broken into a few functional
+blocks,
+
+\begin{itemize}
+  \item event tagger: The core of the timetagger. Responsible for
+    detecting events and producing timetagger records which are then
+    queued in the sample FIFO
+  \item sample FIFO: This is a buffer where event records wait until
+    they can be sent to the FX2
+  \item FX2 interface: This is a state machine which multiplexes
+    access to the FX2 FIFO interface
+  \item Register interface: This parses out commands from the host
+    into register operations used to configure the various blocks of
+    the device
+\end{itemize}
+
+\subsection{Source files}
+\begin{itemize}
+  \item {\tt fx2\_timetag.v}: The top-level module of the design
+  \begin{itemize}
+    \item {\tt fx2\_bidir.v}: The FX2 interface state machine
+    \item {\tt timetag.v}
+    \begin{itemize}
+      \item {\tt reg\_manager.v}: The register interface state machine
+      \item {\tt readonly\_register.v}: Implementation of a read-only register
+      \item {\tt sequencer.v}: The sequencer module
+      \item {\tt apdtimer\_all.v}: The timetagger module
+      \begin{itemize}
+        \item {\tt event\_tagger.v}: The main timer and event tagger
+        \item {\tt strobe\_latch.v}: The strobe trigger module
+      \end{itemize}
+      \item {\tt counter\_register.v}: A general counter exposed as a register
+      \item {\tt sample\_fifo.v}: The sample FIFO
+      \item {\tt sample\_multiplexer}: Convert 48 bit records to 8 byte records for the FIFO
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\section{FX2 USB device}
+The USB bus requires a complex protocol which would be difficult to
+implement on an FPGA alone. For this reason, the Xylo EM board
+includes a dedicated USB interface device, the Cypress FX2. This
+device includes a USB engine, a few FIFOs to buffer data sent and
+received from the bus, and a 8051 processor for high level
+control. This microcontroller runs the firmware found in the
+{\tt timetag\_fx2} repository.
+
+\section{\tt timetag\_acquire}
+
+\section{\tt timetag\_ui}
