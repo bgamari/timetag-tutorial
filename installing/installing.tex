@@ -1,0 +1,64 @@
+Now since you've built the device, it's time to install the various
+pieces of software necessary to make the device work. We strongly
+recommend you use a computer running the latest release of Ubuntu
+Linux. This is the environment in which the software tested and that
+the instructions below will assume.
+
+\section{Installing {\tt timetag-fx2}}
+In addition to the FPGA firmware uploaded to the board in
+\ref{Sec:UploadingFirmware}, the board also requires another piece of
+software to communicate with the PC. This piece of software is the
+firmware for the FX2 USB controller, which must be sent to the board
+every time it is plugged in. The {\tt timetag\_fx2} package takes care
+that this happens.
+
+Installing this package is straight-forward,
+
+\begin{verbatim}
+    $ git clone git://goldnerlab.physics.umass.edu/timetag-fx2
+    $ cd timetag-fx2
+    $ make
+    $ sudo make install
+\end{verbatim}
+
+\section{Installing {\tt timetag-tools}}
+
+Next we'll install the {\tt timetag-tools} package, which includes
+various tools for basic data acquisition and manipulation,
+
+\begin{verbatim}
+    $ git clone git://goldnerlab.physics.umass.edu/timetag-tools
+    $ cd timetag-tools
+    $ make
+    $ sudo make install
+\end{verbatim}
+
+To test the timetagger, we can start {\tt timetag\_acquire} and give
+the device a few sample commands,
+
+\begin{verbatim}
+    $ timetag_acquire
+    ready
+    version?
+    = 6
+    ready
+    clockrate?
+    = 128000000
+    ready
+\end{verbatim}
+
+If the above commands work roughly as seen above, good. If not, verify
+that you've done everything correctly up to now. If so, don't hesitate
+to contact the authors.
+
+Now we can install the user interface, {\tt timetag\_ui}. Starting from the
+{\tt timetag\_tools/} directory,
+
+\begin{verbatim}
+    $ cd ui
+    $ python setup.py build
+    $ sudo python setup.py install
+\end{verbatim}
+
+If all of this went smoothly, proceed to the next Chapter where we
+will describe basic usage of the software.

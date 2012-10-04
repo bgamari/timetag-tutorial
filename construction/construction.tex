@@ -244,6 +244,7 @@ in place with a piece of tape, turn the board over, and solder the
 four pins.
 
 \section{Uploading the firmware}
+\label{Sec:UploadingFirmware}
 
 Download the current
 firmware\footnote{\url{http://goldnerlab.physics.umass.edu/~bgamari/timetag/timetag.rbf}}
@@ -251,42 +252,6 @@ bitstream from the project website. Use the firmware upload tool
 provided by KNJN to upload the firmware to the Xylo's FLASH
 memory. You'll need a Windows machine to run this tool.
 
-\section{Installing {\tt timetag-tools}}
-First, we install the FX2 firmware package,
-
-\begin{verbatim}
-    $ git clone git://goldnerlab.physics.umass.edu/timetag-fx2
-    $ cd timetag-fx2
-    $ make
-    $ sudo make install
-\end{verbatim}
-
-This configures your computer such that the firmware is automatically
-uploaded to the device when plugged in.
-
-Next we'll install the {\tt timetag-tools} package, which includes
-various tools for basic data acquisition and manipulation,
-
-\begin{verbatim}
-    $ git clone git://goldnerlab.physics.umass.edu/timetag-tools
-    $ cd timetag-tools
-    $ make
-    $ sudo make install
-\end{verbatim}
-
-To test the timetagger, we can start {\tt timetag\_acquire} and give
-the device a few sample commands,
-
-\begin{verbatim}
-    $ timetag_acquire
-    ready
-    version?
-    = 6
-    ready
-    clockrate?
-    = 128000000
-    ready
-\end{verbatim}
 
 \section{Done!}
 You are done! Enjoy your timetagger.
