@@ -10,7 +10,7 @@ the larger system.
 \end{figure}
 
 \section{FPGA implementation}
-The core of the timetagger is implemented on the Xylo board's Altera
+The core of the timetagger is implemented on the Xylo EM's Altera
 EP2C5 FPGA. The logic is written in Verilog and can be found in the
 {\tt timetag\_fpga} repository. As seen in FPGA block of
 \ref{Fig:BlockDiagram}, the logic can be broken into a few functional
@@ -29,6 +29,7 @@ blocks,
     the device
 \end{itemize}
 
+The timetagger logic has a 
 \subsection{Record format}
 The record format (found in {\tt timetag-fpga/docs/registers}) is reproduced below.
 
@@ -88,8 +89,8 @@ a simple USB passthrough as seen in \ref{Table:Endpoints}.
 
 The FX2 firmware has only a couple commands of its own as described in
 {\tt timetag-fx2/README}. These are to adjust the queue depth (how
-many records to queue up before sending a USB packet, exposed in {\tt
-  timetag\_ui} as the ``USB latency'').
+many records to queue up before sending a USB packet, exposed in
+{\tt timetag\_ui} as the ``USB latency'').
 
 \section{\tt timetag\_acquire}
 {\tt timetag\_acquire} is a daemon which communicates with and
@@ -107,12 +108,17 @@ $ nc -u /tmp/timetag.sock
 
 {\tt timetag\_ui} is a Python GTK+ interface to the timetagging
 functionality of the hardware. It communicates with
-{\tt timetag\_acquire} through the domain socket and relies on several
+{\tt timetag\_acquire} through a UNIX domain socket and relies on several
 of the other utilities in {\tt timetag\_tools} for low-level
-manipulation of the incoming data stream.
+processing of the incoming data stream (namely {\tt timetag\_bin}).
+
+{\tt timetag\_ui} accepts a {\tt --test} command-line option to use a
+test backend, allowing testing of the frontend even in the absence of
+real hardware. This test backend generates Poisson processes on each
+of the enabled channels.
 
 \section{\tt timetag\_seq\_ui}
 {\tt timetag\_seq\_ui} is a Python GTK+ interface to the sequencer
 functionality of the hardware. It communicates with
-{\tt timetag\_acquire} through the domain socket.
+{\tt timetag\_acquire} through a UNIX domain socket.
 

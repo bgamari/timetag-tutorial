@@ -226,7 +226,8 @@ highly recommended that an external crystal is installed. This is made
 easy by the fact that the Xylo board provides room for a standard
 half-size four-pin crystal oscillator. This location can be found
 adjacent to the FPGA and is marked by white silkscreen outlining the
-crystal package (see Figure \ref{fig:crystal})..
+crystal package (see Figure \ref{fig:crystal}). It is recommended that
+an 8MHz crystal is used.
 
 \begin{figure}
   \center
@@ -247,15 +248,42 @@ with the sharp corner of the silkscreen. Finally, secure the crystal
 in place with a piece of tape, turn the board over, and solder the
 four pins.
 
-\section{Uploading the firmware}
-\label{Sec:UploadingFirmware}
+\section{Uploading the bitstream}
+\label{Sec:UploadingBitstream}
 
-Download the current
-firmware\footnote{\url{http://goldnerlab.physics.umass.edu/~bgamari/timetag/timetag.rbf}}
-bitstream from the project website. Use the firmware upload tool
-provided by KNJN to upload the firmware to the Xylo's FLASH
-memory. You'll need a Windows machine to run this tool.
+The logic on the FPGA is configured with a file called a bitstream.
+If you are using the default clocking configuration (a 32.000 MHz
+crystal multiplied up to 128MHz on the FPGA), you can use the 
+precompiled bitstream found on the project website
+\footnote{\url{http://goldnerlab.physics.umass.edu/~bgamari/timetag/timetag.rbf}}.
+Otherwise see section \ref{Sec:ModifyingClock}.
 
+\begin{figure}
+  \center
+  \includegraphics[scale=0.2]{fpgaconf.png}
+  \caption{KNJN FPGA configuration utility}
+  \label{fig:fpgaconf}
+\end{figure}
+
+Use the firmware upload tool ({\tt FPGAConf.exe}) provided by KNJN to
+upload the bitstream to the Xylo's FLASH memory. You'll need a Windows
+machine to run this tool.
+
+\subsection{Modifying clock configuration}
+\label{Sec:ModifyingClock}
+If you wish to use a different clocking configuration, you'll need to
+grab the firmware sources and compile your own bitstream. The clock
+configuration is specified by the {\tt CLOCKRATE} variable in {\tt
+config.v} and the multipliers {\tt clk0\_divide\_by} and {\tt
+clk0\_multiply\_by} in {\tt altpll0.v}. In particular, these parameters
+are related by,
+
+\[ \mathtt{CLOCKRATE} = \frac{\mathtt{clk0\_multiply\_by}}{\mathtt{clk0\_divide\_by}} f_\mathrm{ext} \]
+
+where $f_\mathrm{ext}$ is the frequency of the external crystal
+oscillator. Of course, whenever the clocking configuration is changed,
+it is necessary to ensure that the logic will still meet timing
+constraints by running a timing simulation with Quartus.
 
 \section{Done!}
 You are done! Enjoy your timetagger.
