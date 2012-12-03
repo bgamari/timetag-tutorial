@@ -110,15 +110,19 @@ with the {\tt help} command.
 \section{\tt timetag\_ui}
 
 {\tt timetag\_ui} is a Python GTK+ interface to the timetagging
-functionality of the hardware. It communicates with
-{\tt timetag\_acquire} through a UNIX domain socket and relies on several
+functionality of the hardware. It communicates with {\tt
+timetag\_acquire} through a UNIX domain socket and relies on several
 of the other utilities in {\tt timetag\_tools} for low-level
 processing of the incoming data stream (namely {\tt timetag\_bin}).
 
-{\tt timetag\_ui} accepts a {\tt --test} command-line option to use a
-test backend, allowing testing of the frontend even in the absence of
-real hardware. This test backend generates Poisson processes on each
-of the enabled channels.
+The capture backend (e.g. {\tt timetag\_acquire}) is somewhat
+abstracted from the user interface and is handled by the {\tt
+CapturePipeline} class.
+In addition to the {\tt timetag\_acquire} backend, {\tt timetag\_ui}
+accepts a {\tt --test} command-line option to use a test backend,
+allowing testing of the frontend even in the absence of real
+hardware. This test backend generates Poissonian emissions on each of
+the enabled channels.
 
 \section{\tt timetag\_seq\_ui}
 {\tt timetag\_seq\_ui} is a Python GTK+ interface to the sequencer
