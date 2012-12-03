@@ -1,3 +1,6 @@
 [submodule "theory/timetag-fpga"]
 	path = theory/timetag-fpga
-	url = git@goldnerlab.physics.umass.edu:timetag-fpga
+	url = git://goldnerlab.physics.umass.edu/timetag-fpga
+[submodule "theory/timetag-tools"]
+	path = theory/timetag-tools
+	url = git://goldnerlab.physics.umass.edu/timetag-tools
