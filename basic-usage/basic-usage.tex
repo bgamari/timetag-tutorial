@@ -75,7 +75,10 @@ range.
 The FRET histogram view offers a convenient way to visualize the state
 of an on-going FRET experiment with a simple binning/threshold
 analysis. Here the acceptor and donor channels are configurable, as
-well as the bin time, threshold, and number of histogram bins.
+well as the bin time, threshold, and number of histogram bins. Note
+that this is an extremely simple analysis which makes no attempt at
+correcting for common experiment artifacts such as crosstalk and
+$\gamma$ parameter.
 
 \begin{figure}
   \center
@@ -83,3 +86,14 @@ well as the bin time, threshold, and number of histogram bins.
   \caption{The FRET histogram view}
   \label{Fig:FretHist}
 \end{figure}
+
+
+\section{Analysis}
+
+While the {\tt timetag\_ui} provides some simple views for quickly
+visualizing the state of an on-going experiment, these are not
+intended to replace proper data analysis. For analysis of timetag data
+we provide a suite of tools in the {\tt photon\_tools}
+package. Installation of these tools has been discussed in
+\ref{Sec:InstallingPhotonTools} and further documentation is provided
+with the package.
