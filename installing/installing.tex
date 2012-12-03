@@ -74,3 +74,23 @@ allowing one to start the application from, e.g., Ubuntu's Dash (see
 
 If all of this went smoothly, proceed to the next Chapter where we
 will describe basic usage of the software.
+
+\section{Installing {\tt photon-tools}}
+
+While not strictly necessary for operation of the timetagger, the {\tt
+photon-tools} package provides a number of useful utilities for the
+analysis of photon timestamp data. This includes basic visualization,
+correlation analysis, and modelling software.
+
+Installation is quite straightforward,
+
+\begin{verbatim}
+$ sudo apt-get install python python-numpy python-scipy python-matplotlib \
+  build-essential cython libboost-all-dev
+$ git clone git://github.com/bgamari/photon-tools.git
+$ cd photon-tools
+$ ./install.sh
+\end{verbatim}
+
+Usage of the individual tools is described in the {\tt readme.mkd}
+file provided in the {\tt photon-tools} directory.
