@@ -11,10 +11,10 @@ Since the difficult work of supporting the FPGA logic is done for us
 by the Xylo board, very little remains to be done. To keep out
 electromagnetic interference, the board should be mounted in a metal
 enclosure. While the size depends upon the number of desired channels,
-we find that a 6x6x6 inch box provides ample space. Additionally, you
-will need BNC connectors and cable to couple signals on to the board,
-as well as stand-offs and bolts for mounting the board in the
-box. Four channels is probably a good starting point.
+we find that a $6"\times6"\times6"$ box provides ample
+space. Additionally, you will need BNC connectors and cable to couple
+signals on to the board, as well as stand-offs and bolts for mounting
+the board in the box. Four channels is probably a good starting point.
 
 \begin{figure}
   \center
@@ -103,7 +103,7 @@ When a sufficient amount of solder has been applied, remove the iron
 and allow the joint to cool. It is very important that the joint is
 allowed to cool without being disturbed. Cooling with forced air,
 moving the joined pieces or otherwise disturbing the joint at this
-point can result in a "cold joint." While a proper solder joint will
+point can result in a ``cold joint.'' While a proper solder joint will
 appear shiny and strongly wetted to both surfaces, a cold joint will
 have a hazy appearance and will often be poorly wetted. While a cold
 joint may hold for a some time, it is far more likely that such a
@@ -121,12 +121,12 @@ dry fully after removing the flux residue.
 
 \subsection{Soldering the pin header}
 
-In order to connect the BNC connectors to the board, a pin header
-needs to be soldered to the board. The board has room for a $2 \times
-13$ 0.1 inch spacing pin header directly beside the FPGA. This header
-should be placed as shown in Figure \ref{fig:header} and soldered from
-the back side of the board. Again, be sure to use care in soldering to
-the board.
+In order to connect the BNC connectors to the board, a pin header (the
+pins circled in Figure \ref{fig:header}) needs to be soldered to the
+board. The board has room for a $2 \times 13$ 0.1 inch spacing pin
+header directly beside the FPGA. This header should be placed as shown
+in Figure \ref{fig:header} and soldered from the back side of the
+board. Again, be sure to use care in soldering to the board.
 
 \begin{figure}
   \center
@@ -137,9 +137,10 @@ the board.
 
 \section{BNC connectors}
 
-Bulkhead BNC connectors are used to bring the signal from the outside
-world to the FPGA board. You will need one connector for each desired
-signal listed in Table \ref{table:pins}.
+Bulkhead BNC connectors such as those seen in Figures
+\ref{fig:front-panel} and \ref{fig:front-panel-rear} are used to bring
+the signal from the outside world to the FPGA board. You will need one
+connector for each desired signal listed in Table \ref{table:pins}.
 
 While unshielded single conductor wire can be used in a pinch, it is
 recommended that coaxial cable is used to couple the BNC connectors to
@@ -231,7 +232,7 @@ an 8MHz crystal is used.
 
 \begin{figure}
   \center
-  \includegraphics[scale=0.2]{oscillator.jpeg}
+  \includegraphics[scale=0.2]{oscillator.png}
   \caption{Location of crystal oscillator pads}
   \label{fig:crystal}
 \end{figure}
@@ -251,11 +252,13 @@ four pins.
 \section{Uploading the bitstream}
 \label{Sec:UploadingBitstream}
 
-The logic on the FPGA is configured with a file called a bitstream.
-If you are using the default clocking configuration (a 32.000 MHz
-crystal multiplied up to 128MHz on the FPGA), you can use the 
-precompiled bitstream found on the project website
-\footnote{\url{http://goldnerlab.physics.umass.edu/~bgamari/timetag/timetag.rbf}}.
+The logic on the FPGA is configured with a file known as a
+bitstream. This file is generated from the source files provided in
+the {\tt timetag-fpga} package.  If you are using the default clocking
+configuration (a 32.000 MHz crystal multiplied up to 128MHz on the
+FPGA), you can use the precompiled bitstream found on the project
+website.
+\footnote{\url{http://goldnerlab.physics.umass.edu/~bgamari/timetag/timetag-32MHz_4x.rbf}}
 Otherwise see section \ref{Sec:ModifyingClock}.
 
 \begin{figure}
@@ -266,8 +269,9 @@ Otherwise see section \ref{Sec:ModifyingClock}.
 \end{figure}
 
 Use the firmware upload tool ({\tt FPGAConf.exe}) provided by KNJN to
-upload the bitstream to the Xylo's FLASH memory. You'll need a Windows
-machine to run this tool.
+upload the bitstream ({\it e.g.} {\tt timetag-32MHz_4x.rbf} provided
+with the paper package) to the Xylo's FLASH memory. You'll need a
+Windows machine to run this tool.
 
 \subsection{Modifying clock configuration}
 \label{Sec:ModifyingClock}
@@ -283,7 +287,8 @@ are related by,
 where $f_\mathrm{ext}$ is the frequency of the external crystal
 oscillator. Of course, whenever the clocking configuration is changed,
 it is necessary to ensure that the logic will still meet timing
-constraints by running a timing simulation with Quartus.
+constraints by running a timing simulation with Altera's Quartus FPGA
+development environment.
 
 \section{Done!}
 You are done! Enjoy your timetagger.
