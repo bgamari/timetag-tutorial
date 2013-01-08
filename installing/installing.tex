@@ -17,11 +17,18 @@ Installing this package is straight-forward. Simply open a Terminal
 run the following commands,
 
 \begin{verbatim}
-    $ git clone git://goldnerlab.physics.umass.edu/timetag-fx2
+    $ sudo apt-get install build-essential sdcc git cc1111 fxload python-pip
+    $ git clone --recursive git://goldnerlab.physics.umass.edu/timetag-fx2
     $ cd timetag-fx2
+    $ make -Cfx2lib
     $ make
     $ sudo make install
+    $ sudo udevadm control --reload-rules
+    $ cd ..
 \end{verbatim}
+
+At this point, unplug and plug back in the timetagger so it will be
+re-detected.
 
 \section{Installing {\tt timetag-tools}}
 
@@ -32,33 +39,38 @@ various tools for basic data acquisition and manipulation,
     $ git clone git://goldnerlab.physics.umass.edu/timetag-tools
     $ cd timetag-tools
     $ make
-    $ sudo make install
+    $ sudo make install install-blacklist
+    $ cd ..
 \end{verbatim}
 
 To test the timetagger, we can start {\tt timetag\_acquire} and give
-the device a few sample commands,
+the device a few sample commands ({\it italicized} text is produced by
+the program, you should type unitalicized text),
 
-\begin{verbatim}
+\begin{alltt}
     $ timetag_acquire
-    ready
+    {\emph ready}
     version?
-    = 6
-    ready
+    {\emph = 6}
+    {\emph ready}
     clockrate?
-    = 128000000
-    ready
-\end{verbatim}
+    {\emph = 128000000}
+    {\emph ready}
+\end{alltt}
+
+Press {\tt Ctrl-C} to exit.
 
 If the above commands work roughly as seen above, good. If not, verify
 that you've done everything correctly up to now. If so, don't hesitate
 to contact the author.
 
 Now we can install the user interface, {\tt timetag\_ui}. Starting from the
-{\tt timetag\_tools/} directory,
+{\tt timetag\_tools} directory,
 
 \begin{verbatim}
     $ cd ui
-    $ sudo apt-get install python-passfd
+    $ sudo apt-get install python-matplotlib
+    $ sudo pip install python-passfd
     $ python setup.py build
     $ sudo python setup.py install
 \end{verbatim}
@@ -88,7 +100,7 @@ correlation analysis, and modelling software.
 Installation is quite straightforward,
 
 \begin{verbatim}
-$ sudo apt-get install python python-numpy python-scipy python-matplotlib \
+$ sudo apt-get install python python-numpy python-scipy python-matplotlib 
   build-essential cython libboost-all-dev
 $ git clone git://github.com/bgamari/photon-tools.git
 $ cd photon-tools
