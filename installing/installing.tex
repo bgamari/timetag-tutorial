@@ -36,7 +36,7 @@ Next we'll install the {\tt timetag-tools} package, which includes
 various tools for basic data acquisition and manipulation,
 
 \begin{verbatim}
-    $ sudo apt-get install libusb-1.0-0-dev
+    $ sudo apt-get install libusb-1.0-0-dev libzmq3-dev
     $ git clone git://goldnerlab.physics.umass.edu/timetag-tools
     $ cd timetag-tools
     $ make
@@ -48,7 +48,8 @@ the device a few sample commands ({\it italicized} text is produced by
 the program, you should type only the unitalicized commands),
 
 \begin{alltt}
-    $ timetag_acquire
+    $ timetag_acquire &
+    $ ./timetag-cli
     {\it ready}
     version?
     {\it = 6}
@@ -69,7 +70,7 @@ Now we can install the user interface, {\tt timetag\_ui}. Starting from the
 
 \begin{verbatim}
     $ cd ui
-    $ sudo apt-get install python-matplotlib libboost-all-dev
+    $ sudo apt-get install python-matplotlib libboost-all-dev python-zmq
     $ sudo pip install python-passfd
     $ python setup.py build
     $ sudo python setup.py install
