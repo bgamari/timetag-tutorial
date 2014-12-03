@@ -35,9 +35,15 @@ subject and at very least the ``System Design''
 section\footnote{\url{http://en.wikipedia.org/wiki/Usb\#System\_design}}.
 
 \subsection{Record format}
-The record format (found in {\tt timetag-fpga/docs/registers}) is reproduced below.
+The record format (found in {\tt timetag-fpga/docs/timetag-format}) is
+reproduced below.
 
-\verbatiminput{theory/timetag-fpga/docs/timetag-format}
+\begin{figure}
+  \center
+  \includegraphics[scale=0.7]{record-format.pdf}
+  \caption{The timetagger's record format.}
+  \label{Fig:RecordFormat}
+\end{figure}
 
 \subsection{Register interface}
 The register interface documentation (found in
@@ -100,12 +106,13 @@ many records to queue up before sending a USB packet, exposed in
 {\tt timetag\_acquire} is a daemon which communicates with and
 multiplexes access to the timetagger hardware. It is responsible for
 abstracting the device's register interface and presents an ASCII
-command interface through a UNIX domain socket
-({\tt /tmp/timetag.sock}). One can interface directly with the daemon
-with the {\tt netcat} utility,
+command interface through ZeroMQ socket,
+({\tt /tmp/timetag-ctrl}). One can interface directly with the daemon
+with the {\tt timetag-cli} utility,
 
 \begin{verbatim}
-$ nc -u /tmp/timetag.sock
+$ timetag-cli capture?
+1
 \end{verbatim}
 
 A description of the commands supported by this interface is available
@@ -122,14 +129,9 @@ processing of the incoming data stream (namely {\tt timetag\_bin}).
 The capture backend (e.g. {\tt timetag\_acquire}) is somewhat
 abstracted from the user interface and is handled by the {\tt
 CapturePipeline} class.
-In addition to the {\tt timetag\_acquire} backend, {\tt timetag\_ui}
-accepts a {\tt --test} command-line option to use a test backend,
-allowing testing of the frontend even in the absence of real
-hardware. This test backend generates Poissonian emissions on each of
-the enabled channels.
 
 \section{\tt timetag\_seq\_ui}
+
 {\tt timetag\_seq\_ui} is a Python GTK+ interface to the sequencer
-functionality of the hardware. It communicates with
-{\tt timetag\_acquire} through a UNIX domain socket.
+functionality of the hardware.
 
