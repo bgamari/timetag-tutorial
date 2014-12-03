@@ -1,0 +1,8 @@
+# Timetagger usage manual
+
+This is a usage manual for the Goldner lab's FPGA
+[photon timetagging system][timetagger]. You probably want the
+[rendered version][rendered].
+
+[timetagger]: https://goldnerlab.physics.umass.edu/wiki/FpgaTimeTagger
+[rendered]: https://goldnerlab.physics.umass.edu/wiki/FpgaTimeTagger?action=AttachFile&do=get&target=construction.pdf
