@@ -130,6 +130,40 @@ The capture backend (e.g. {\tt timetag\_acquire}) is somewhat
 abstracted from the user interface and is handled by the {\tt
 CapturePipeline} class.
 
+\subsection{Metadata}
+
+On starting a data acquisition run, {\tt timetag_ui} will write two files: 
+{\tt FILE.timetag} contains the timestamp data coming from the
+instrument while {\tt FILE.timetag.meta} is a JSON document containing
+various metadata about the experiment and instrument configuration.
+
+\subsection{Integration with other systems}
+
+{\tt timetag_ui} has a variety of features which make it possible to
+easily integrate with other instruments, software, and procedures.
+These are namely {\it metadata hooks} and {\it acquisition
+hooks}. Following in the UNIX tradition, these are scripts located in
+specific directories which are executed when certain events occur.
+
+When a hook is executed the {\tt TIMETAG_OUTPUT} environment variable
+is set to the name of the active output file (if any).
+
+\subsubsection{Metadata hooks}
+
+Metadata hooks are run when an acquisition to a file is started. They
+are expected to write a properly formatted JSON document to standard
+output. This JSON document will be merged into the metadata written to
+the {\tt .meta} file corresponding to the output file. Note that it is
+expected that metadata hooks are short-lived tasks; {\tt timetag_ui}
+will hang until all of the metadata hooks have finished.
+
+\subsubsection{Acquisition hooks}
+
+Acquisition hooks are run whenever read-out is started and terminated
+with {\tt SIGTERM} when read-out is stopped. This facility is intended
+to allow for collection of external instrument parameters
+(e.g. excitation laser power) while an experiment is underway.
+
 \section{\tt timetag\_seq\_ui}
 
 {\tt timetag\_seq\_ui} is a Python GTK+ interface to the sequencer
